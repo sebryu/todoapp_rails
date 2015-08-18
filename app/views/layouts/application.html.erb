@@ -7,7 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+<% if user_signed_in? %>
+	<%= link_to "Listy zadań", lists_path %>
+	<%= link_to "Użytkownicy", users_path %>
+	<%= link_to "Moje zadania", tasks_user_path(current_user) %>
+	<%= link_to "Edytuj", edit_user_path(current_user) %>
+	<%= link_to "Wyloguj", destroy_user_session_path, method: :delete %>
+<% else %>
+	<%= link_to "Log", new_user_session_path %>
+	<%= link_to "reg", new_user_registration_path %>
+<% end %>
 <%= yield %>
 
 </body>
