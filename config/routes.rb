@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :users, except: [:new, :create] do
     get 'tasks', on: :member
   end
+  resources :tasks do
+    post 'add_user', on: :member
+  end
   root to: "tasks#index"
 
 

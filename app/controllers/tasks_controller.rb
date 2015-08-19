@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
-  before_action :set_list
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_list, except: [:add_user]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :add_user]
 
   # GET /tasks
   # GET /tasks.json
@@ -56,6 +56,11 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to list_tasks_url, notice: 'Task was successfully destroyed.' }
     end
+  end
+
+  def add_user
+    @task.add_user current_user
+    redirect_to tasks_user_url(current_user), notice: 'Task jest nasz'
   end
 
   private
